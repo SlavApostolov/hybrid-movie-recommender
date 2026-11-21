@@ -43,7 +43,7 @@ Legend: `[x]` done and merged into `dev`, `[ ]` not done yet.
 
 - [x] **Slav:** EDA notebook `notebooks/01_explore_ratings.ipynb`: rating distribution, sparsity, ratings per movie and per user (PR #3)
 - [x] **Slav:** train/test split in `src/data.py`: random, global time-based, per-user time-based (PR #4)
-- [ ] **Hristo:** metrics: RMSE, MAE, Precision@K, Recall@K, NDCG@K
+- [x] **Hristo:** metrics: RMSE, MAE, Precision@K, Recall@K, NDCG@K in `src/metrics.py`, with tests in `tests/test_metrics.py`
 - [ ] **Slav + Hristo:** baselines: global mean, per-movie mean, popularity ranking
 - [ ] **Aram:** explore `movies.csv` and `tags.csv`, clean genres, plan the feature set
 - [ ] **Hristo:** documentation 1.1 Introduction (idea, terminology, approaches)
@@ -167,6 +167,8 @@ Notes (Windows and Git Bash):
 |---|---|
 | `src/download_data.py` | Downloads and extracts MovieLens into `data/raw/` |
 | `src/data.py` | `load_ratings`, `random_split`, `time_split`, `user_time_split` |
+| `src/metrics.py` | `rmse`, `mae`, `precision_at_k`, `recall_at_k`, `ndcg_at_k`, `evaluate_ranking` |
+| `tests/` | Unit tests: `python -m unittest discover tests` |
 | `notebooks/01_explore_ratings.ipynb` | EDA of the ratings |
 | `docs/` | Documentation (1.1-1.4), this overview, `results.csv` |
 | `models/` | Saved trained models (git-ignored) |
