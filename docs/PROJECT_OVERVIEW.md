@@ -37,7 +37,7 @@ Legend: `[x]` done and merged into `dev`, `[ ]` not done yet.
 - [x] **Slav:** virtual environment (Python 3.13), data download script `src/download_data.py` (PR #2)
 - [x] **Slav:** teammates added to the repo
 - [ ] **Aram, Hristo:** clone, create venv, `pip install -r requirements.txt`, run `python src/download_data.py`
-- [ ] **Hristo:** README with overview, setup steps and results (skeleton now, full version in Week 5)
+- [x] **Hristo:** README with overview, setup steps and results (skeleton done; full version in Week 5)
 
 ### Week 1: Foundations and baselines
 
