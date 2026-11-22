@@ -167,6 +167,8 @@ Notes (Windows and Git Bash):
 |---|---|
 | `src/download_data.py` | Downloads and extracts MovieLens into `data/raw/` |
 | `src/data.py` | `load_ratings`, `random_split`, `time_split`, `user_time_split` |
+| `src/metrics.py` | `rmse`, `mae`, `precision_at_k`, `recall_at_k`, `ndcg_at_k`, `evaluate_ranking` |
+| `tests/` | Unit tests: `python -m unittest discover tests` |
 | `notebooks/01_explore_ratings.ipynb` | EDA of the ratings |
 | `notebooks/02_baselines.ipynb` | Baseline results table |
 | `src/baselines.py` | `GlobalMean`, `MovieMean`, `Popularity` (shared `fit` / `predict` / `recommend` interface) |
