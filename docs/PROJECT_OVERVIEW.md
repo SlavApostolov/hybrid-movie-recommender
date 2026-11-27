@@ -1,7 +1,7 @@
 # Hybrid Movie Recommender: Project Overview
 
 *Course: Applying Artificial Intelligence (AAI), topic 4: "Recommender systems - hybrid approach".*
-*Status as of 16 Nov 2026. Update the checkboxes as work is merged into `dev`.*
+*Status as of 27 Nov 2026. Update the checkboxes as work is merged into `dev`.*
 
 ## 1. What we are building
 
@@ -36,26 +36,28 @@ Legend: `[x]` done and merged into `dev`, `[ ]` not done yet.
 - [x] **Slav:** GitHub repo, `main` and `dev` branches, folder structure, `.gitignore`, `requirements.txt`
 - [x] **Slav:** virtual environment (Python 3.13), data download script `src/download_data.py` (PR #2)
 - [x] **Slav:** teammates added to the repo
-- [ ] **Aram, Hristo:** clone, create venv, `pip install -r requirements.txt`, run `python src/download_data.py`
+- [x] **Hristo:** clone, create venv, `pip install -r requirements.txt`, run `python src/download_data.py`
+- [ ] **Aram:** clone, create venv, `pip install -r requirements.txt`, run `python src/download_data.py`
 - [x] **Hristo:** README with overview, setup steps and results (skeleton done; full version in Week 5)
 
 ### Week 1: Foundations and baselines
 
 - [x] **Slav:** EDA notebook `notebooks/01_explore_ratings.ipynb`: rating distribution, sparsity, ratings per movie and per user (PR #3)
 - [x] **Slav:** train/test split in `src/data.py`: random, global time-based, per-user time-based (PR #4)
-- [ ] **Hristo:** metrics: RMSE, MAE, Precision@K, Recall@K, NDCG@K
+- [x] **Hristo:** metrics: RMSE, MAE, Precision@K, Recall@K, NDCG@K in `src/metrics.py`, with tests (PR #6)
 - [x] **Slav + Hristo:** baselines: global mean, per-movie mean, popularity ranking in `src/baselines.py`, results in `notebooks/02_baselines.ipynb` and `docs/results.csv` (done by Hristo)
-- [ ] **Aram:** explore `movies.csv` and `tags.csv`, clean genres, plan the feature set
+- [x] **Aram:** explore `movies.csv` and `tags.csv`, clean genres, plan the feature set (done by Slav: `notebooks/03_explore_movies.ipynb`, PR #9)
 - [ ] **Hristo:** documentation 1.1 Introduction (idea, terminology, approaches)
 
 **Done when:** a baseline results table exists and the metrics code is tested.
 
 ### Week 2: Collaborative filtering and first content features
 
-- [ ] **Slav:** user-based and item-based KNN (cosine similarity), by hand first, then with `surprise`
+- [x] **Slav:** user-based KNN by hand in `src/knn.py`, tuned in `notebooks/04_knn.ipynb` (PR #10, #11)
+- [ ] **Slav:** item-based KNN; compare with `surprise`
 - [ ] **Slav:** matrix factorization (SVD) with hyperparameter tuning
 - [ ] **Aram:** TF-IDF matrix of genres and tags, similarity function
-- [ ] **Hristo:** evaluation pipeline that runs any model on the same split and saves results to `docs/results.csv`
+- [x] **Hristo:** evaluation pipeline that runs any model on the same split and saves results to `docs/results.csv` (`src/evaluation.py`; rebuild the table with `python -m src.evaluation`)
 - [ ] **Slav:** draft CF theory text
 
 **Done when:** KNN and SVD beat the baselines in the results table.
@@ -99,7 +101,7 @@ Legend: `[x]` done and merged into `dev`, `[ ]` not done yet.
 
 ## 4. Schedule note
 
-Week 1 took about two weeks, so the project is roughly one week behind the original 5-week plan. Aram's and Hristo's Week 1 and Week 2 tasks do not depend on Slav's work, so they can start **in parallel now**. As of this update, no commits from them are on GitHub yet. Suggested catch-up:
+Week 1 took about two weeks, so the project is roughly one week behind the original 5-week plan. Aram's and Hristo's Week 1 and Week 2 tasks do not depend on Slav's work, so they can start **in parallel now**. As of 27 Nov, Hristo's metrics, baselines and README skeleton are merged; Aram has no commits yet. Suggested catch-up:
 
 - Hristo starts the metrics code and Aram starts the movies/tags exploration immediately.
 - Run the content-based work (Aram) alongside CF (Slav) in Weeks 2-3.
@@ -139,7 +141,7 @@ Week 1 took about two weeks, so the project is roughly one week behind the origi
 **Shared conventions**
 - Ratings tables are DataFrames with columns `userId`, `movieId`, `rating`, `timestamp`, `datetime`.
 - Always load and split data through `src/data.py`. Reusable code goes in `src/`; notebooks only explore and present results.
-- Every model's scores go into one shared table, `docs/results.csv`.
+- Every model's scores go into one shared table, `docs/results.csv`. Score models with `src/evaluation.py` and save with `save_results`, which replaces only your own rows. Add finished models to `default_models()` there.
 - Secrets (the TMDB key) live in `.env`, which is git-ignored. Never commit them.
 - Before committing a notebook: **Kernel, Restart and Run All Cells**.
 
@@ -168,6 +170,8 @@ Notes (Windows and Git Bash):
 | `src/download_data.py` | Downloads and extracts MovieLens into `data/raw/` |
 | `src/data.py` | `load_ratings`, `random_split`, `time_split`, `user_time_split` |
 | `src/metrics.py` | `rmse`, `mae`, `precision_at_k`, `recall_at_k`, `ndcg_at_k`, `evaluate_ranking` |
+| `src/evaluation.py` | `evaluate`, `run_experiments`, `save_results` (updates only your own rows in `docs/results.csv`); `python -m src.evaluation` rebuilds the whole table |
+| `src/knn.py` | `UserKNN` (user-based collaborative filtering) |
 | `tests/` | Unit tests: `python -m unittest discover tests` |
 | `notebooks/01_explore_ratings.ipynb` | EDA of the ratings |
 | `notebooks/02_baselines.ipynb` | Baseline results table |
